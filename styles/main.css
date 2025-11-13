@@ -1,0 +1,18 @@
+:root {
+  --default-font: "Montserrat", sans-serif;
+  --backgroud-color: #0a1748;
+  --text-color-main: white;
+  --text-color-sec: rgba(255, 255, 255, 0.616);
+}
+
+body {
+  font-family: var(--default-font);
+  background-color: var(--backgroud-color);
+  color: var(--text-color-main);
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+}
