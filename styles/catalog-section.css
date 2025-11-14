@@ -1,0 +1,57 @@
+:root {
+  --default-font: "Montserrat", sans-serif;
+  --backgroud-color: #0a1748;
+  --text-color-main: white;
+  --text-color-sec: rgba(255, 255, 255, 0.616);
+  --default-color: #0038ff;
+}
+
+#title-section h2 {
+  font-size: 1.6rem;
+}
+
+#title-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+#catalog-filters {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#catalog-filters select {
+  background-color: #0038ff;
+  border: none;
+  padding: 5px 20px;
+  color: var(--text-color-main);
+  font-family: var(--default-font);
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 0px 0px 10px 0px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#container-cards {
+  padding-top: 50px;
+  min-width: 380px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.image-card {
+  background-image: url(/img/ponte-para-terabitia.webp);
+  background-size: cover;
+  min-height: 300px;
+  max-width: 170px;
+  border-radius: 20px;
+  border: 2px solid var(--text-color-sec);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.288);
+}
