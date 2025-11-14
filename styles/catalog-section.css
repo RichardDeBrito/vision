@@ -46,6 +46,7 @@ main {
 .card {
   margin-bottom: 50px;
   min-width: 178px;
+  max-width: 178px;
 }
 
 .image-card {
