@@ -10,6 +10,17 @@ ul > li > a {
   background-size: cover;
 }
 
+#container-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 489px;
+  left: 0;
+  right: 0;
+  height: 0;
+  height: 350px;
+  background: linear-gradient(to bottom, transparent, #0a1748);
+  z-index: 0;
+}
 header {
   display: flex;
   justify-content: center;
@@ -17,6 +28,7 @@ header {
   flex-direction: row-reverse;
   position: relative;
   min-height: 200px;
+  z-index: 10;
 }
 
 .logo {
@@ -46,6 +58,8 @@ header {
   flex-direction: column;
   gap: 20px;
   padding-bottom: 50px;
+  z-index: 20;
+  position: relative;
 }
 
 #container-text-hero h1 {

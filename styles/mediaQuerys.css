@@ -91,6 +91,10 @@
     height: 700px;
   }
 
+  #container-hero::after {
+    bottom: 201px;
+  }
+
   #logo-header {
     margin-left: 100px;
   }
@@ -114,7 +118,7 @@
   }
 
   #catalog-filters {
-    margin-left: 20px;
+    margin-left: 90px;
     z-index: 10;
   }
 
@@ -141,5 +145,11 @@
     justify-content: space-around;
     max-width: 90vw;
     margin: auto;
+  }
+}
+
+@media (min-width: 1700px) {
+  #container-hero::after {
+    bottom: 227px;
   }
 }
