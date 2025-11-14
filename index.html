@@ -6,24 +6,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Audiowide&family=Averia+Sans+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/search-button.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vision</title>
 </head>
 <body>
     <div id="container-hero">
         <header>
-            <nav>
+            <button id="hamburguer">
+                <span class="hamburguer-line"></span>
+                <span class="hamburguer-line"></span>
+                <span class="hamburguer-line"></span>
+            </button>
+
+            <nav id="menu">
                 <ul>
                     <li><a href="#">Equipe</a></li>
                     <li><a href="#">Catalogo</a></li>
                     <li><a href="#">Inicio</a></li>
                 </ul>
             </nav>
+
+            <div id="overlay"></div>
+
             <div id="search-barh">
-                <img src="img/lupa.png" alt="lupa">
+                <img src="img/lupa-branca.png" alt="lupa">
                 <input type="text" placeholder="Buscar conteúdo...">
             </div>
-            <div class="logo">
+            <div class="logo" id="logo-header">
                 <img src="img/play-vision.png" alt="player-logo">
                 <p>VISION</p>
             </div>
@@ -116,8 +127,8 @@
                             Cristian Brandão
                         </div>
                         <div class="social">
-                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon"></a>
-                            <a href="#"><img src="img/github-icon.png" alt="github-icon"></a>
+                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                            <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
                         </div>
                     </div>
                     <div class="member">
@@ -125,8 +136,8 @@
                             Francisco Osmar
                         </div>
                         <div class="social">
-                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon"></a>
-                            <a href="#"><img src="img/github-icon.png" alt="github-icon"></a>
+                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                            <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
                         </div>
                     </div>
                     <div class="member">
@@ -134,8 +145,8 @@
                             Richard Brito
                         </div>
                         <div class="social">
-                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon"></a>
-                            <a href="#"><img src="img/github-icon.png" alt="github-icon"></a>
+                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                            <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
                         </div>
                     </div>
                     <div class="member">
@@ -143,8 +154,8 @@
                             Victor Emanuel
                         </div>
                         <div class="social">
-                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon"></a>
-                            <a href="#"><img src="img/github-icon.png" alt="github-icon"></a>
+                            <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                            <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
                         </div>
                     </div>
                 </div>

@@ -16,3 +16,70 @@ body {
   padding: 0px;
   font-size: 16px;
 }
+
+.icon-img {
+  max-width: 20px;
+}
+
+ul > li > a {
+  text-decoration: none;
+  color: var(--text-color-main);
+}
+
+#container-hero {
+  background-image: url(/img/banner.webp);
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 100vw;
+  position: relative;
+  min-height: 200px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#logo-header {
+  position: fixed;
+  top: 0;
+}
+
+.logo > img {
+  width: 50px;
+}
+
+.logo p {
+  font-weight: bolder;
+  font-size: 1.6rem;
+}
+
+#container-text-hero {
+  max-width: 350px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 50px;
+}
+
+#container-text-hero h1 {
+  font-size: 1.6rem;
+  padding-bottom: 10px;
+}
+
+#details-button {
+  text-decoration: none;
+  color: var(--text-color-main);
+  background-color: var(--text-color-sec);
+  border: 4px solid white;
+  border-radius: 15px;
+  padding: 8px 15px;
+}
