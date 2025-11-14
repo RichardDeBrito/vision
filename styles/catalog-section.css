@@ -84,6 +84,7 @@ main {
   border: 2px solid rgba(255, 255, 255, 0.514);
   color: rgba(255, 255, 255, 0.664);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+  margin-right: 8px;
 }
 
 .title-card {
@@ -92,5 +93,5 @@ main {
 
 .title-card p {
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 500;
 }

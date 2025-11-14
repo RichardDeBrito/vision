@@ -7,7 +7,7 @@
 
   #input-search {
     display: block;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     background-color: var(--text-color-sec);
@@ -34,7 +34,7 @@
   }
 
   #menu {
-    position: fixed;
+    position: absolute;
     width: auto;
     height: auto;
     background-color: transparent;
@@ -74,11 +74,21 @@
   }
 
   #container-text-hero {
+    display: flex;
+    min-width: 700px;
     margin-left: 200px;
+    height: 250px;
+    top: 200px;
+    justify-content: center;
+    position: relative;
+  }
+
+  #container-text-hero h1 {
+    font-size: 3rem;
   }
 
   #container-hero {
-    height: 500px;
+    height: 700px;
   }
 
   #logo-header {
@@ -131,9 +141,5 @@
     justify-content: space-around;
     max-width: 90vw;
     margin: auto;
-  }
-
-  footer {
-    background: linear-gradient(#0a1748, black);
   }
 }
