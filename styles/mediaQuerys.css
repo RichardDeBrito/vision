@@ -91,6 +91,11 @@
     justify-content: start;
   }
 
+  .card {
+    margin-bottom: 50px;
+    min-width: 195px;
+  }
+
   #title-section {
     display: flex;
     position: absolute;
