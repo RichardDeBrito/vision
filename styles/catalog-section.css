@@ -46,12 +46,52 @@ main {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.card {
+  margin-bottom: 50px;
+}
+
 .image-card {
   background-image: url(/img/ponte-para-terabitia.webp);
   background-size: cover;
+  background-position: center;
   min-height: 300px;
-  max-width: 170px;
+  max-width: 175px;
   border-radius: 20px;
   border: 2px solid var(--text-color-sec);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.288);
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+}
+
+.year {
+  background-color: var(--default-color);
+  display: flex;
+  justify-content: end;
+  padding: 8px 15px;
+  width: 40px;
+  height: 20px;
+  border-radius: 0px 15px 0px 15px;
+  margin: 5px 5px 0px 0px;
+  box-shadow: 0px 0px 10px var(--default-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.box-info {
+  background-color: rgba(255, 255, 255, 0.199);
+  padding: 3px 8px;
+  border-radius: 7px;
+  border: 2px solid rgba(255, 255, 255, 0.514);
+  color: rgba(255, 255, 255, 0.664);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+}
+
+.title-card {
+  margin-bottom: 15px;
+}
+
+.title-card p {
+  font-size: 0.9rem;
+  font-weight: 700;
 }
