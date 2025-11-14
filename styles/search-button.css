@@ -1,15 +1,10 @@
-:root {
-  --default-font: "Montserrat", sans-serif;
-  --backgroud-color: #0a1748;
-  --text-color-main: white;
-  --text-color-sec: rgba(255, 255, 255, 0.616);
-}
+@import url("main.css");
 
-#search-barh > input {
+#input-search {
   display: none;
 }
 
-#search-barh {
+#button-search {
   background-color: var(--text-color-sec);
   position: absolute;
   top: 10px;
@@ -24,6 +19,10 @@
   position: fixed;
 }
 
-#search-barh > img {
+#button-search > img {
+  width: 20px;
+}
+
+#input-search > img {
   width: 20px;
 }

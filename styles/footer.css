@@ -1,0 +1,27 @@
+@import url("main.css");
+
+.member {
+  display: flex;
+  width: 50vw;
+  justify-content: space-between;
+  margin: 20px 0px;
+  font-weight: 600;
+}
+
+#container-team {
+  margin-left: 20px;
+}
+
+#container-team h4 {
+  font-size: 1.1rem;
+}
+
+#logo-footer {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px;
+}
+
+footer {
+  margin-top: 50px;
+}

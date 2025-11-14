@@ -1,3 +1,5 @@
+@import url("main.css");
+
 #container-hero {
   background-image: url(/img/banner.webp);
   background-size: cover;

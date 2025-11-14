@@ -6,10 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Audiowide&family=Averia+Sans+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/menu.css">
-    <link rel="stylesheet" href="styles/search-button.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/catalog-section.css">
+    <link rel="stylesheet" href="styles/mediaQuerys.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vision</title>
 </head>
@@ -33,8 +30,13 @@
             <div id="overlay"></div>
 
             <div id="search-barh">
-                <img src="img/lupa-branca.png" alt="lupa">
-                <input type="text" placeholder="Buscar conteúdo...">
+                <div id="button-search">
+                    <img src="img/lupa-branca.png" alt="lupa">
+                </div>
+                <div id="input-search">
+                    <img src="img/lupa-branca.png" alt="lupa">
+                    <input type="text" placeholder="Buscar conteúdo...">
+                </div>
             </div>
             <div class="logo" id="logo-header">
                 <img src="img/play-vision.png" alt="player-logo">
@@ -53,23 +55,25 @@
         </div>
     </div>
     <section id="catalog-sec">
-        <div id="title-section">
-            <h2>Catálogo</h2>
-        </div>
-        <div id="catalog-filters">
-            <div>
-                <select name="select-genre" id="select-genre">
-                    <option value="Medieval">Medieval</option>
-                    <option value="Medieval">Ação</option>
-                    <option value="Medieval">Romance</option>
-                    <option value="Medieval">Guerra</option>
-                </select>
+        <div id="line-top-catalog-sec">
+            <div id="title-section">
+                <h2>Catálogo</h2>
             </div>
-            <div>
-                <select name="select-type" id="select-type">
-                    <option value="Filmes">Filmes</option>
-                    <option value="Filmes">Séries</option>
-                </select>
+            <div id="catalog-filters">
+                <div>
+                    <select name="select-genre" id="select-genre">
+                        <option value="Medieval">Medieval</option>
+                        <option value="Medieval">Ação</option>
+                        <option value="Medieval">Romance</option>
+                        <option value="Medieval">Guerra</option>
+                    </select>
+                </div>
+                <div>
+                    <select name="select-type" id="select-type">
+                        <option value="Filmes">Filmes</option>
+                        <option value="Filmes">Séries</option>
+                    </select>
+                </div>
             </div>
         </div>
         <main>
@@ -193,7 +197,7 @@
                 </div>
             </div>
         </div>
-        <div class="logo">
+        <div class="logo" id="logo-footer">
             <img src="img/play-vision.png" alt="play-vision">
             <p>VISION</p>
         </div>
