@@ -1,3 +1,5 @@
+import {stringLimited} from './utils.js';
+
 const API_KEY = 'b950b2f8751b9d6c2cf1bf2e45f1dd11';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -51,6 +53,8 @@ const createCardMovie = (moviesData) => {
         //ano do filme
         const imageCard = document.createElement('div');
         imageCard.classList.add('image-card');
+        imageCard.style.backgroundImage = `url(${IMG_BASE_URL}${movie.poster_path})`
+        console.log(movie)
         const yearBox = document.createElement('div');
         yearBox.classList.add('year');
         const textYearBox = document.createElement('p');
@@ -62,7 +66,7 @@ const createCardMovie = (moviesData) => {
         const titleCard = document.createElement('div');
         titleCard.classList.add('title-card');
         const textTitleCard = document.createElement('p');
-        textTitleCard.textContent = movie.title;
+        textTitleCard.textContent = stringLimited(movie.title);
         titleCard.appendChild(textTitleCard);
 
         //box info
@@ -74,7 +78,6 @@ const createCardMovie = (moviesData) => {
         boxInfoType.textContent = 'Filme';
         boxInfoGen.classList.add('box-info');
         boxInfoGen.textContent = 'nada';
-        console.log(movie)
         containerInfo.appendChild(boxInfoType);
         containerInfo.appendChild(boxInfoGen);
     

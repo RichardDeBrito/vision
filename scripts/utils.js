@@ -14,3 +14,14 @@ const hamburguer = document.getElementById('hamburguer');
             overlay.classList.remove('active');
         });
 
+export function stringLimited(text) {
+    if (text.length > 20) {
+        let titleResume = text.substring(0,19);
+        titleResume += "...";
+        console.log(titleResume)
+        return titleResume;
+    } else {
+        return text;
+    }
+
+};
