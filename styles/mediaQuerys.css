@@ -85,10 +85,6 @@
     margin-left: 100px;
   }
 
-  #container-cards {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
   #line-top-catalog-sec {
     display: flex;
     flex-direction: row-reverse;
@@ -105,5 +101,34 @@
   #catalog-filters {
     margin-left: 20px;
     z-index: 10;
+  }
+
+  #container-team > div {
+    display: grid;
+    gap: 0px;
+    margin-top: 20px;
+    margin-left: 30px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .member {
+    width: 200px;
+    margin: 10px;
+  }
+
+  #container-team {
+    width: 500px;
+  }
+
+  #container-footer > div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    max-width: 90vw;
+    margin: auto;
+  }
+
+  footer {
+    background: linear-gradient(#0a1748, black);
   }
 }

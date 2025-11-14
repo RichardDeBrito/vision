@@ -30,23 +30,22 @@
 
 main {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
-
 #container-cards {
   padding-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  box-sizing: border-box;
-  width: 100%;
+  max-width: 90vw;
+  margin: auto;
 }
 
 .card {
   margin-bottom: 50px;
-  max-width: 180px;
+  min-width: 195px;
 }
 
 .image-card {
@@ -54,6 +53,7 @@ main {
   background-size: cover;
   background-position: center;
   min-height: 300px;
+  width: 100%;
   border-radius: 20px;
   border: 2px solid var(--text-color-sec);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.288);
