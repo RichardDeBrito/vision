@@ -7,3 +7,10 @@ export function stringLimited(text) {
         return text;
     }
 };
+
+export function captInputValue() {
+    const valueInputSearch = document.getElementById('input-search');
+    const valueInput = valueInputSearch.value;
+
+    return valueInput;
+}

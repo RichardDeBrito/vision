@@ -103,6 +103,17 @@ export async function loadCards() {
     }
 }
 
+export async function loadCardsSearch(name) {
+    try {
+        const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${name}`);
+        const data = await response.json();
+        createCard(data.results);
+
+    } catch (error) {
+        console.error('Erro ao buscar filme:', error);
+    }
+}
+
 export async function loadGenres() {
     try {
         const respose = await fetch(
@@ -128,3 +139,4 @@ const populateSelectGenre = (genres) => {
         selectGenre.appendChild(option);
     });
 };
+

@@ -1,5 +1,4 @@
 @import url("main.css");
-
 #container-hero {
   background-image: url(/img/banner.webp);
   background-size: cover;
@@ -87,9 +86,19 @@ header {
   padding: 10px 0px;
   display: flex;
   justify-content: start;
+  flex-direction: row-reverse;
   align-items: center;
   height: 50px;
   box-sizing: border-box;
+}
+
+#input-search:-webkit-autofill,
+#input-search:-webkit-autofill:hover,
+#input-search:-webkit-autofill:focus,
+#input-search:-webkit-autofill:active {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 #input-search {
@@ -101,6 +110,7 @@ header {
   outline: none;
   color: var(--text-color-main);
   font-size: 1rem;
+  margin-left: 10px;
 }
 
 #input-search::placeholder {
@@ -112,4 +122,9 @@ header {
   max-width: 20px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+#button-search {
+  background: none;
+  border: none;
 }
