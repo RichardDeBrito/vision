@@ -137,3 +137,12 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+#return {
+  display: none;
+  margin-bottom: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}

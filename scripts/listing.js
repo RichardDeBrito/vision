@@ -21,12 +21,14 @@ async function createCard (cardData) {
             
             const yearBox = document.createElement('div');
             yearBox.classList.add('year');
-            const textYearBox = document.createElement('p');
+            let textYearBox = document.createElement('p');
 
             if (card.first_air_date) {
                 textYearBox.textContent = card.first_air_date.substring(0,4);
-            } else {
+            } else if(card.release_date) {
                 textYearBox.textContent = card.release_date.substring(0,4);
+            } else {
+                textYearBox.innerHTML = 'N/A';
             }
             
             yearBox.appendChild(textYearBox);
@@ -107,34 +109,6 @@ export async function loadCards(numPage) {
         const data = await response.json();
         createCard(data.results);
         
-
-        const nextPages = document.getElementById('next');
-
-        nextPages.addEventListener('click', () => {
-            const containerCards = document.getElementById('container-cards');
-            containerCards.innerHTML = '';
-            
-            const atualPages = document.querySelectorAll('.num-page');
-
-            let initialPage = `${atualPages[4].innerHTML}`;
-
-            loadCards(initialPage);
-
-            let countPagesString = initialPage;
-
-            console.log(countPagesString);
-
-            atualPages.forEach((page) => {
-
-                page.innerHTML = `${countPagesString}`;
-                let countPagesInt = Number(countPagesString);
-
-                countPagesInt += 1;
-                
-                countPagesString = countPagesInt.toString();
-                console.log(countPagesString);
-            })
-        });
     } catch (error) {
         console.error('Erro ao carregar os filmes:', error);
     }
