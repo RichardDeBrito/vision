@@ -53,7 +53,7 @@ main {
   background-repeat: no-repeat;
   width: 100%;
   aspect-ratio: 2/3;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 2px solid var(--text-color-sec);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.288);
   display: flex;

@@ -1,54 +1,6 @@
 @import url("main.css");
 
 @media (min-width: 1024px) {
-  #button-search {
-    display: none;
-  }
-
-  header {
-    justify-content: start;
-  }
-
-  #menu {
-    position: absolute;
-    width: auto;
-    height: auto;
-    background-color: transparent;
-    padding: 0;
-    display: block;
-    left: 40%;
-    margin-top: 25px;
-  }
-
-  #menu ul {
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-  }
-
-  #menu li {
-    margin-bottom: 0;
-  }
-
-  #menu a {
-    padding: 5px 10px;
-    font-weight: 600;
-    border-radius: 4px;
-  }
-
-  #menu a:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  #overlay {
-    display: none;
-  }
-
-  #hamburguer {
-    display: none;
-  }
-
   #container-text-hero {
     display: flex;
     min-width: 700px;
@@ -65,10 +17,6 @@
 
   #container-hero {
     height: 700px;
-  }
-
-  #logo-header {
-    margin-left: 100px;
   }
 
   #line-top-catalog-sec {
@@ -123,5 +71,42 @@
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
     max-width: 95vw;
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+  }
+  #container-header {
+    flex-direction: row;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    max-width: 1400px;
+    gap: 30px;
+    justify-content: space-between;
+  }
+
+  #menu {
+    flex-direction: row;
+    margin-top: 0px;
+    height: 100%;
+    max-width: 900px;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  #options-menu {
+    height: 100%;
+    width: 300px;
+    justify-content: space-around;
+  }
+
+  #logo-header {
+    margin-left: 20px;
+  }
+
+  #search-bar {
+    width: 400px;
   }
 }

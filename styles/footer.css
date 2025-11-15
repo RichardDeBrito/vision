@@ -25,3 +25,7 @@
 footer {
   margin-top: 50px;
 }
+
+#options-menu {
+  display: red;
+}
