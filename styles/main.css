@@ -29,3 +29,8 @@ body {
 footer {
   background: linear-gradient(#0a1748, black);
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+}

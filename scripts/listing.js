@@ -7,10 +7,12 @@ const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const selectGenre = document.getElementById('select-genre');
 
 async function createCard (cardData) {
+    
     const containerCards = document.getElementById('container-cards');
 
     for (const card of cardData) {
         try {
+
             if (!card.poster_path) continue;
 
             const imageCard = document.createElement('div');
@@ -51,7 +53,13 @@ async function createCard (cardData) {
             const boxInfoType = document.createElement('span');
             const boxInfoGen = document.createElement('span');
             boxInfoType.classList.add('box-info');
-            boxInfoType.textContent = 'Filme';
+            
+            if(card.media_type === "tv") {
+               boxInfoType.textContent = 'Serie'; 
+            } else {
+                boxInfoType.textContent = 'Filme';
+            }
+
             boxInfoGen.classList.add('box-info');
 
             let primaryId = card.genre_ids[0];
@@ -92,12 +100,41 @@ export async function primaryGenre(id) {
     }
 }
 
-export async function loadCards() {
+export async function loadCards(numPage) {
     try {
-        const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=a&page=1`);
+
+        const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=a&page=${numPage}`);
         const data = await response.json();
         createCard(data.results);
-    
+        
+
+        const nextPages = document.getElementById('next');
+
+        nextPages.addEventListener('click', () => {
+            const containerCards = document.getElementById('container-cards');
+            containerCards.innerHTML = '';
+            
+            const atualPages = document.querySelectorAll('.num-page');
+
+            let initialPage = `${atualPages[4].innerHTML}`;
+
+            loadCards(initialPage);
+
+            let countPagesString = initialPage;
+
+            console.log(countPagesString);
+
+            atualPages.forEach((page) => {
+
+                page.innerHTML = `${countPagesString}`;
+                let countPagesInt = Number(countPagesString);
+
+                countPagesInt += 1;
+                
+                countPagesString = countPagesInt.toString();
+                console.log(countPagesString);
+            })
+        });
     } catch (error) {
         console.error('Erro ao carregar os filmes:', error);
     }
