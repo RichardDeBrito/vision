@@ -4,6 +4,7 @@
   background-image: url(/img/banner.webp);
   background-size: cover;
   box-shadow: inset 0 -50px 30px -10px #0a1748;
+  background-position: center;
 }
 #details-button {
   background-color: var(--text-color-sec);
@@ -12,15 +13,17 @@
   border-radius: 10px;
   text-decoration: none;
   color: white;
+  margin-top: 50px;
 }
 
 #container-text-hero {
-  min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin: 20px;
   padding-bottom: 50px;
+  min-height: 200px;
+  max-width: 1000px;
 }
 
 header {
@@ -84,12 +87,25 @@ header {
   padding: 10px 0px;
   display: flex;
   justify-content: start;
+  align-items: center;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 #input-search {
   border: none;
   background: none;
   width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  outline: none;
+  color: var(--text-color-main);
+  font-size: 1rem;
+}
+
+#input-search::placeholder {
+  font-weight: 600;
+  color: var(--text-color-sec);
 }
 
 #search-bar img {
