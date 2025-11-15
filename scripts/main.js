@@ -37,7 +37,7 @@ const populateSelectGenre = (genres) => {
 
 async function loadMovies() {
     try {
-        const response = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=pt-BR&page=1`);
+        const response = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=pt-BR&page=2`);
         const data = await response.json();
         createCardMovie(data.results);
     
@@ -54,7 +54,6 @@ const createCardMovie = (moviesData) => {
         const imageCard = document.createElement('div');
         imageCard.classList.add('image-card');
         imageCard.style.backgroundImage = `url(${IMG_BASE_URL}${movie.poster_path})`
-        console.log(movie)
         const yearBox = document.createElement('div');
         yearBox.classList.add('year');
         const textYearBox = document.createElement('p');

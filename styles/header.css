@@ -1,81 +1,43 @@
 @import url("main.css");
 
-ul > li > a {
-  text-decoration: none;
-  color: var(--text-color-main);
-}
-
 #container-hero {
   background-image: url(/img/banner.webp);
   background-size: cover;
+  position: relative;
+  z-index: 1;
 }
 
 #container-hero::after {
   content: "";
   position: absolute;
-  bottom: 489px;
+  bottom: -1px;
   left: 0;
   right: 0;
-  height: 0;
-  height: 350px;
+  height: 60%;
   background: linear-gradient(to bottom, transparent, #0a1748);
-  z-index: 0;
-}
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row-reverse;
-  position: relative;
-  min-height: 200px;
-  z-index: 10;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-#logo-header {
-  position: absolute;
-  top: 0;
-}
-
-.logo > img {
-  width: 50px;
-}
-
-.logo p {
-  font-weight: bolder;
-  font-size: 1.6rem;
-}
-
-#container-text-hero {
-  max-width: 350px;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-bottom: 50px;
-  z-index: 20;
-  position: relative;
-}
-
-#container-text-hero h1 {
-  font-size: 1.6rem;
-  padding-bottom: 10px;
-}
-
-#container-text-hero p {
-  font-weight: 600;
+  z-index: 1;
 }
 
 #details-button {
-  text-decoration: none;
-  color: var(--text-color-main);
   background-color: var(--text-color-sec);
-  border: 4px solid white;
-  border-radius: 15px;
-  padding: 8px 15px;
+  padding: 10px 20px;
+  border: 3px solid var(--text-color-main);
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  z-index: 20;
+}
+
+#container-text-hero {
+  background-color: green;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+header {
+  background-color: red;
+  height: 50px;
+  width: 100%;
 }
