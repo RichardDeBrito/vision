@@ -28,3 +28,33 @@ export function truncateText(text, maxLength = 150) {
     
     return text.substring(0, maxLength) + '...';
 }
+
+let spinnerStartTime = 0;
+const SPINNER_MIN_DISPLAY_TIME = 100; 
+
+export function showSpinner() {
+    const spinner = document.getElementById('global-spinner');
+    if (spinner) {
+        spinner.style.display = 'flex';
+        spinner.setAttribute('aria-hidden', 'false');
+        spinnerStartTime = Date.now();
+    }
+}
+
+export function hideSpinner() {
+    const spinner = document.getElementById('global-spinner');
+    if (spinner) {
+        const elapsedTime = Date.now() - spinnerStartTime;
+        const remainingTime = Math.max(0, SPINNER_MIN_DISPLAY_TIME - elapsedTime);
+        
+        if (remainingTime > 0) {
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                spinner.setAttribute('aria-hidden', 'true');
+            }, remainingTime);
+        } else {
+            spinner.style.display = 'none';
+            spinner.setAttribute('aria-hidden', 'true');
+        }
+    }
+}

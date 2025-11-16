@@ -1,4 +1,4 @@
-import {stringLimited} from './utils.js';
+import {stringLimited, showSpinner, hideSpinner} from './utils.js';
 
 const API_KEY = 'b950b2f8751b9d6c2cf1bf2e45f1dd11';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -8,11 +8,14 @@ const selectGenre = document.getElementById('select-genre');
 
 export async function loadMovieDetails(movieId, mediaType = 'movie') {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/${mediaType}/${movieId}?api_key=${API_KEY}&language=pt-BR`);
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Erro ao carregar detalhes:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
@@ -117,19 +120,21 @@ export async function primaryGenre(id) {
 
 export async function loadCards(numPage) {
     try {
-
+        showSpinner();
         const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=a&page=${numPage}`);
         const data = await response.json();
-    createCard(data.results);
-    return data;
-        
+        createCard(data.results);
+        return data;
     } catch (error) {
         console.error('Erro ao carregar os filmes:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadCardsSearch(name, page = 1) {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${name}&page=${page}`);
         const data = await response.json();
         
@@ -142,11 +147,14 @@ export async function loadCardsSearch(name, page = 1) {
 
     } catch (error) {
         console.error('Erro ao buscar filme:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadCardsByGenre(genreId, page = 1) {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&language=pt-BR&with_genres=${genreId}&page=${page}`);
         const data = await response.json();
         
@@ -158,11 +166,14 @@ export async function loadCardsByGenre(genreId, page = 1) {
 
     } catch (error) {
         console.error('Erro ao carregar filmes por gênero:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadMovies(page = 1) {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&language=pt-BR&page=${page}`);
         const data = await response.json();
 
@@ -173,11 +184,14 @@ export async function loadMovies(page = 1) {
         return data;
     } catch (error) {
         console.error('Erro ao carregar filmes:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadTV(page = 1) {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&page=${page}`);
         const data = await response.json();
 
@@ -188,11 +202,14 @@ export async function loadTV(page = 1) {
         return data;
     } catch (error) {
         console.error('Erro ao carregar séries:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadTVByGenre(genreId, page = 1) {
     try {
+        showSpinner();
         const response = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&with_genres=${genreId}&page=${page}`);
         const data = await response.json();
 
@@ -203,11 +220,14 @@ export async function loadTVByGenre(genreId, page = 1) {
         return data;
     } catch (error) {
         console.error('Erro ao carregar séries por gênero:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
 export async function loadGenres(mediaType = 'movie') {
     try {
+        showSpinner();
         const response = await fetch(
             `${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}&language=pt-BR`
         );
@@ -217,6 +237,8 @@ export async function loadGenres(mediaType = 'movie') {
 
     } catch (error) {
         console.error('Erro ao carregar gêneros:', error);
+    } finally {
+        hideSpinner();
     }
 }
 
