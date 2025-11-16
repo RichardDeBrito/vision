@@ -34,3 +34,27 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+/* Global spinner */
+#global-spinner {
+  position: fixed;
+  inset: 0; /* top/right/bottom/left 0 */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+}
+
+.spinner {
+  width: 56px;
+  height: 56px;
+  border: 6px solid rgba(255,255,255,0.15);
+  border-top-color: var(--default-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

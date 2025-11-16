@@ -1,13 +1,11 @@
 import { loadGenres, populateSelectGenre } from './listing.js';
 import { pagination } from './pagination.js';
-import { initCarousel } from './carousel.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const initialGenres = await loadGenres('movie');
     populateSelectGenre(initialGenres);
 
     pagination({ mode: 'discover', mediaType: 'all' });
-    initCarousel();
 
     const selectGenre = document.getElementById('select-genre');
     const selectType = document.getElementById('select-type');
