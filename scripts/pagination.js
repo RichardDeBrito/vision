@@ -2,121 +2,102 @@ import { loadCards, loadCardsSearch } from "./listing.js";
 import { captInputValue } from "./utils.js";
 
 export function pagination(typeLoadCardsNum) {
-
     const inputValue = captInputValue();
-
-    if(inputValue.trim() !== '') {   
-        loadCardsSearch(inputValue, 1);
-    
-    } else {
-        loadCards(1);
-    };
 
     const containerCards = document.getElementById('container-cards');
     containerCards.innerHTML = '';
-    
+
+    if(inputValue.trim() !== '') {   
+        loadCardsSearch(inputValue, 1);
+    } else {
+        loadCards(1);
+    }
+
     const buttonsPages = document.querySelectorAll('.num-page');
     
     for (const buttonPage of buttonsPages) {
         buttonPage.addEventListener('click', () => {
-            const pageSelect = buttonPage.innerHTML;
-    
-            const containerCards = document.getElementById('container-cards');
+            const pageSelect = parseInt(buttonPage.innerHTML);
+
             containerCards.innerHTML = '';
-    
+
             switch (typeLoadCardsNum) {
                 case 1:
                     loadCards(pageSelect);
                     break;
                 case 2:
-                    loadCardsSearch(inputValue, 1);
-    
+                    loadCardsSearch(inputValue, pageSelect);
+                    break;
                 default:
+                    loadCards(pageSelect);
                     break;
             }
-    
-            const pageActive = document.getElementById('num-page-active');
-            pageActive.removeAttribute('id');
-    
-            buttonPage.setAttribute('id', 'num-page-active');
-        })
-    };
 
-    //Passar 5 paginas pra frente ou pra trás
+            const pageActive = document.getElementById('num-page-active');
+            if (pageActive) {
+                pageActive.removeAttribute('id');
+            }
+
+            buttonPage.setAttribute('id', 'num-page-active');
+        });
+    }
+
     const nextPages = document.getElementById('next');
     const returnPages = document.getElementById('return');
     
     nextPages.addEventListener('click', () => {
-    
-        const containerCards = document.getElementById('container-cards');
         containerCards.innerHTML = '';
                 
         const atualPages = document.querySelectorAll('.num-page');
 
-        console.log(atualPages)
-    
         if(atualPages[4].innerHTML >= 5) {
             returnPages.style.display = 'flex';
         }
-    
-        let endPage = `${atualPages[4].innerHTML}`;
+
+        let endPage = parseInt(atualPages[4].innerHTML);
         
         loadCards(endPage);
-    
-        let countPagesString = endPage;
-        let countPagesInt = Number(countPagesString);
+
+        let countPagesInt = endPage;
         
         const atualActivePage = document.getElementById('num-page-active');
-        atualActivePage.removeAttribute('id', 'num-page-active');
+        if (atualActivePage) {
+            atualActivePage.removeAttribute('id');
+        }
 
         atualPages[0].setAttribute('id', 'num-page-active');
 
         atualPages.forEach((page) => {
-    
-            page.innerHTML = `${countPagesString}`;
-            countPagesInt = Number(countPagesString);
-    
+            page.innerHTML = `${countPagesInt}`;
             countPagesInt += 1;
-                    
-            countPagesString = countPagesInt.toString();
-        })
+        });
     });
     
     returnPages.addEventListener('click', () => {
-        const containerCards = document.getElementById('container-cards');
         containerCards.innerHTML = '';
     
         const atualPages = document.querySelectorAll('.num-page');
         
-        let initialPage = `${atualPages[0].innerHTML}`;
+        let initialPage = parseInt(atualPages[0].innerHTML);
         
         loadCards(initialPage - 4);
-    
-        let countPagesString = initialPage;
-        let countPagesInt = Number(countPagesString);
+
+        let countPagesInt = initialPage - 4;
 
         const atualActivePage = document.getElementById('num-page-active');
-        atualActivePage.removeAttribute('id', 'num-page-active');
+        if (atualActivePage) {
+            atualActivePage.removeAttribute('id');
+        }
 
         atualPages[0].setAttribute('id', 'num-page-active');
     
-        if(initialPage === '5') {
+        if(initialPage === 5) {
             returnPages.style.display = 'none';
-        };
-    
-    
-        countPagesInt = initialPage - 4;
-        countPagesString = countPagesInt.toString();
-    
+        }
+
         atualPages.forEach((page) => {
-    
-            page.innerHTML = `${countPagesString}`;
-            countPagesInt = Number(countPagesString);
-    
+            page.innerHTML = `${countPagesInt}`;
             countPagesInt += 1;
-    
-            countPagesString = countPagesInt.toString();
-        })
+        });
     });
 }
-

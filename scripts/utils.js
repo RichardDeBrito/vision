@@ -14,3 +14,16 @@ export function captInputValue() {
 
     return valueInput;
 }
+
+export function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('pt-BR', options);
+}
+
+export function truncateText(text, maxLength = 150) {
+    if (text.length <= maxLength) return text;
+    
+    return text.substring(0, maxLength) + '...';
+}
