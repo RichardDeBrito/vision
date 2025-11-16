@@ -1,20 +1,6 @@
 @import url("main.css");
 
 @media (min-width: 1024px) {
-  #container-text-hero {
-    top: 350px;
-    position: relative;
-    margin-left: 70px;
-  }
-
-  #container-text-hero h1 {
-    font-size: 3rem;
-  }
-
-  #container-hero {
-    height: 700px;
-  }
-
   #line-top-catalog-sec {
     display: flex;
     flex-direction: row-reverse;

@@ -1,5 +1,9 @@
 @import url("main.css");
 
+#catalog-sec {
+  margin-top: 80px;
+}
+
 #title-section h2 {
   font-size: 1.6rem;
 }
@@ -34,6 +38,8 @@ main {
 }
 #container-cards {
   padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
@@ -79,13 +85,18 @@ main {
 
 .box-info {
   background-color: rgba(255, 255, 255, 0.199);
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.514);
   color: rgba(255, 255, 255, 0.664);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
   margin-right: 8px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
 }
 
 .title-card {
@@ -168,5 +179,12 @@ main {
 }
 
 .num-page:hover {
-    background-color: rgba(0, 56, 255, 0.3);
+  background-color: #0038ff;
+}
+
+@media (min-width: 1024px) {
+  #container-cards {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
