@@ -19,8 +19,6 @@ export async function loadMovieDetails(movieId, mediaType = 'movie') {
 async function showMovieDetails(movieId, mediaType) {
     const details = await loadMovieDetails(movieId, mediaType);
     
-    console.log('Detalhes do filme:', details);
-    
     alert(`Título: ${details.title || details.name}\nSinopse: ${details.overview || 'Sem sinopse disponível'}`);
 }
 

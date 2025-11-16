@@ -64,7 +64,6 @@ async function applyFilters(genreId, type) {
 }
 
 function goToHome() {
-    console.log('Voltando ao início...');
     
     const inputSearch = document.getElementById('input-search');
     inputSearch.value = '';

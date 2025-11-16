@@ -8,18 +8,16 @@ let autoPlayInterval;
 
 export async function initCarousel() {
     try {
-        console.log('Iniciando carrossel hero...');
         
         const response = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=pt-BR&page=1`);
         const data = await response.json();
         
         carouselItems = data.results.slice(0, 5).filter(movie => movie.backdrop_path);
-        console.log('Filmes carregados:', carouselItems.length);
         
         createHeroCarousel(carouselItems);
         setupHeroCarouselNavigation();
         startAutoPlay();
-        
+
     } catch (error) {
         console.error('Erro ao carregar carrossel hero:', error);
     }
@@ -43,32 +41,23 @@ function createHeroCarousel(movies) {
         const indicator = document.createElement('div');
         indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
         indicator.addEventListener('click', () => {
-            console.log('Clicou no indicador:', index);
             goToSlide(index);
         });
         indicators.appendChild(indicator);
     });
-    
-    console.log('Carrossel criado com', movies.length, 'itens');
 }
 
 function setupHeroCarouselNavigation() {
     const prevButton = document.getElementById('hero-carousel-prev');
     const nextButton = document.getElementById('hero-carousel-next');
     
-    console.log('Configurando navegação...');
-    console.log('Prev button:', prevButton);
-    console.log('Next button:', nextButton);
-    
     prevButton.addEventListener('click', () => {
-        console.log('Clicou em anterior');
         stopAutoPlay();
         goToSlide(currentSlide - 1);
         startAutoPlay();
     });
     
     nextButton.addEventListener('click', () => {
-        console.log('Clicou em próximo');
         stopAutoPlay();
         goToSlide(currentSlide + 1);
         startAutoPlay();
@@ -102,7 +91,6 @@ function setupSwipeNavigation() {
 }
 
 function goToSlide(slideIndex) {
-    console.log('Indo para slide:', slideIndex, 'de', carouselItems.length);
     
     if (carouselItems.length === 0) {
         console.error('Nenhum item no carrossel');
@@ -125,8 +113,6 @@ function goToSlide(slideIndex) {
     indicators.forEach((indicator, index) => {
         indicator.classList.toggle('active', index === currentSlide);
     });
-    
-    console.log('Slide atual:', currentSlide);
 }
 
 function startAutoPlay() {
