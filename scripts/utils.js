@@ -1,4 +1,5 @@
 export function stringLimited(text) {
+    if (!text) return '';
     if (text.length > 16) {
         let titleResume = text.substring(0,16);
         titleResume += "...";

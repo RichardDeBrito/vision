@@ -1,23 +1,33 @@
-import {loadGenres, loadCards, loadCardsByGenre, loadCardsSearch} from './listing.js';
+import { loadGenres, populateSelectGenre } from './listing.js';
 import { pagination } from './pagination.js';
 import { initCarousel } from './carousel.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadGenres();
-    pagination(1);
+document.addEventListener('DOMContentLoaded', async () => {
+    const initialGenres = await loadGenres('movie');
+    populateSelectGenre(initialGenres);
+
+    pagination({ mode: 'discover', mediaType: 'all' });
     initCarousel();
 
     const selectGenre = document.getElementById('select-genre');
     const selectType = document.getElementById('select-type');
 
     selectGenre.addEventListener('change', handleFilterChange);
-    selectType.addEventListener('change', handleFilterChange);
+
+    selectType.addEventListener('change', async () => {
+        const typeValue = selectType.value;
+        const media = typeValue === 'tv' ? 'tv' : 'movie';
+        const genres = await loadGenres(media);
+        populateSelectGenre(genres);
+        handleFilterChange();
+    });
 
     const buttonSearch = document.getElementById('button-search');
     buttonSearch.addEventListener('click', () => {
         const containerCards = document.getElementById('container-cards');
         containerCards.innerHTML = '';
-        pagination(2);
+        const query = document.getElementById('input-search').value.trim();
+        pagination({ mode: 'search', query });
     });
 
     document.getElementById('input-search').addEventListener('keypress', (e) => {
@@ -55,12 +65,10 @@ function handleFilterChange() {
 async function applyFilters(genreId, type) {
     const containerCards = document.getElementById('container-cards');
     containerCards.innerHTML = '';
-
-    if (genreId) {
-        await loadCardsByGenre(genreId, 1);
-    } else {
-        await loadCards(1);
-    }
+ 
+    const mediaType = type || 'all';
+    const options = { mode: 'discover', mediaType, genreId: genreId || null };
+    await pagination(options);
 }
 
 function goToHome() {
@@ -80,7 +88,8 @@ function goToHome() {
     const containerCards = document.getElementById('container-cards');
     containerCards.innerHTML = ''; 
 
-    loadCards(1);
+
+    pagination({ mode: 'discover', mediaType: 'all' });
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }

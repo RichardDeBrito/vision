@@ -48,13 +48,8 @@ async function createCard (cardData) {
             titleCard.classList.add('title-card');
             const textTitleCard = document.createElement('p');
             
-            if (card.media_type === "tv") {
-                textTitleCard.textContent = stringLimited(card.name);
-                
-            } else {
-                textTitleCard.textContent = stringLimited(card.title);
-
-            };
+            const rawTitle = card.name || card.title || card.original_name || card.original_title || (card.id ? `#${card.id}` : 'Sem título');
+            textTitleCard.textContent = stringLimited(rawTitle);
             
             titleCard.appendChild(textTitleCard);
     
@@ -64,22 +59,24 @@ async function createCard (cardData) {
             const boxInfoGen = document.createElement('span');
             boxInfoType.classList.add('box-info');
             
-            if(card.media_type === "tv") {
-               boxInfoType.textContent = 'Serie'; 
+            const inferredMediaType = card.media_type || (card.first_air_date || card.name ? 'tv' : 'movie');
+            if (inferredMediaType === 'tv') {
+                boxInfoType.textContent = 'Serie';
             } else {
                 boxInfoType.textContent = 'Filme';
             }
 
             boxInfoGen.classList.add('box-info');
 
-            let primaryId = card.genre_ids[0];
-
-            if (primaryId === 878) {
-                primaryId = card.genre_ids[1];
+            let primaryId = null;
+            if (Array.isArray(card.genre_ids) && card.genre_ids.length > 0) {
+                primaryId = card.genre_ids[0];
+                if (primaryId === 878 && card.genre_ids.length > 1) {
+                    primaryId = card.genre_ids[1];
+                }
             }
 
-            const genreName = await primaryGenre(primaryId);
-            
+            const genreName = primaryId ? await primaryGenre(primaryId) : 'Desconhecido';
             boxInfoGen.textContent = `${genreName}`;
             containerInfo.appendChild(boxInfoType);
             containerInfo.appendChild(boxInfoGen);
@@ -91,8 +88,8 @@ async function createCard (cardData) {
             cardBox.appendChild(containerInfo);
         
             cardBox.addEventListener('click', () => {
-                const mediaType = card.media_type || (card.first_air_date ? 'tv' : 'movie');
-    
+                const mediaType = inferredMediaType || (card.first_air_date ? 'tv' : 'movie');
+
                 window.location.href = `detail.html?id=${card.id}&type=${mediaType}`;
             });
             
@@ -105,11 +102,14 @@ async function createCard (cardData) {
 
 export async function primaryGenre(id) {
     try {
-        const listGenres = await loadGenres();
-        
-        const genre = listGenres.find(genre => genre.id === id);
+        const movieGenres = await loadGenres('movie');
+        const tvGenres = await loadGenres('tv');
 
-        return genre ? genre.name: 'Desconhecido';
+        const combined = [...(movieGenres || []), ...(tvGenres || [])];
+
+        const genre = combined.find(g => g.id === id);
+
+        return genre ? genre.name : 'Desconhecido';
     } catch (error) {
         console.error('Erro ao capturar genero:', error);
     }
@@ -161,14 +161,57 @@ export async function loadCardsByGenre(genreId, page = 1) {
     }
 }
 
-export async function loadGenres() {
+export async function loadMovies(page = 1) {
     try {
-        const response = await fetch(
-            `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=pt-BR`
-        );
+        const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&language=pt-BR&page=${page}`);
         const data = await response.json();
 
-        populateSelectGenre(data.genres);
+        const containerCards = document.getElementById('container-cards');
+        containerCards.innerHTML = '';
+
+        createCard(data.results);
+        return data;
+    } catch (error) {
+        console.error('Erro ao carregar filmes:', error);
+    }
+}
+
+export async function loadTV(page = 1) {
+    try {
+        const response = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&page=${page}`);
+        const data = await response.json();
+
+        const containerCards = document.getElementById('container-cards');
+        containerCards.innerHTML = '';
+
+        createCard(data.results);
+        return data;
+    } catch (error) {
+        console.error('Erro ao carregar séries:', error);
+    }
+}
+
+export async function loadTVByGenre(genreId, page = 1) {
+    try {
+        const response = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&with_genres=${genreId}&page=${page}`);
+        const data = await response.json();
+
+        const containerCards = document.getElementById('container-cards');
+        containerCards.innerHTML = '';
+
+        createCard(data.results);
+        return data;
+    } catch (error) {
+        console.error('Erro ao carregar séries por gênero:', error);
+    }
+}
+
+export async function loadGenres(mediaType = 'movie') {
+    try {
+        const response = await fetch(
+            `${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}&language=pt-BR`
+        );
+        const data = await response.json();
 
         return data.genres;
 
@@ -177,7 +220,7 @@ export async function loadGenres() {
     }
 }
 
-const populateSelectGenre = (genres) => {
+export const populateSelectGenre = (genres) => {
     selectGenre.innerHTML = '<option value="">Todos os gêneros</option>';
     genres.forEach(genre => {
         const option = document.createElement('option');

@@ -1,18 +1,29 @@
-import { loadCards, loadCardsSearch, loadCardsByGenre } from "./listing.js";
+import { loadCards, loadCardsSearch, loadCardsByGenre, loadMovies, loadTV, loadTVByGenre } from "./listing.js";
 import { captInputValue } from "./utils.js";
 
-export async function pagination(typeLoadCardsNum = 1) {
-    const inputValue = captInputValue();
+export async function pagination(options = { mode: 'discover', mediaType: 'all', genreId: null, query: '' }) {
+    const inputValue = options.query !== undefined ? options.query : captInputValue();
     const containerCards = document.getElementById('container-cards');
     const passPages = document.getElementById('pass-pages');
 
     const MAX_PAGES = 500;
 
     let data;
-    if (typeLoadCardsNum === 2 && inputValue.trim() !== '') {
+
+    if (options.mode === 'search' && inputValue.trim() !== '') {
         data = await loadCardsSearch(inputValue, 1);
     } else {
-        data = await loadCards(1);
+  
+        if (options.mediaType === 'tv') {
+            if (options.genreId) data = await loadTVByGenre(options.genreId, 1);
+            else data = await loadTV(1);
+        } else if (options.mediaType === 'movie') {
+            if (options.genreId) data = await loadCardsByGenre(options.genreId, 1);
+            else data = await loadMovies(1);
+        } else {
+          
+            data = await loadCards(1);
+        }
     }
 
     if (!data) return;
@@ -69,11 +80,21 @@ export async function pagination(typeLoadCardsNum = 1) {
 
     async function loadPage(pageNumber) {
         containerCards.innerHTML = '';
-        if (typeLoadCardsNum === 2 && inputValue.trim() !== '') {
+            if (options.mode === 'search' && inputValue.trim() !== '') {
             await loadCardsSearch(inputValue, pageNumber);
-        } else {
-            await loadCards(pageNumber);
-        }
+                return;
+            }
+
+          
+            if (options.mediaType === 'tv') {
+                if (options.genreId) await loadTVByGenre(options.genreId, pageNumber);
+                else await loadTV(pageNumber);
+            } else if (options.mediaType === 'movie') {
+                if (options.genreId) await loadCardsByGenre(options.genreId, pageNumber);
+                else await loadMovies(pageNumber);
+            } else {
+                await loadCards(pageNumber);
+            }
     }
 
     pagesContainer.addEventListener('click', async (e) => {
