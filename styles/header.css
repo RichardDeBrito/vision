@@ -1,10 +1,10 @@
 @import url("main.css");
+
 #container-hero {
-  background-image: url(/img/banner.webp);
-  background-size: cover;
-  box-shadow: inset 0 -50px 30px -10px #0a1748;
-  background-position: center;
+    position: relative; 
+    height: 700px; 
 }
+
 #details-button {
   background-color: var(--text-color-sec);
   padding: 10px 20px;
@@ -127,4 +127,140 @@ header {
 #button-search {
   background: none;
   border: none;
+}
+
+/* ... TODO O SEU CSS ATUAL DO HEADER FICA AQUI ... */
+
+/* 🔥 COLE ESTE CÓDIGO NO FINAL DO ARQUIVO ↓↓↓ */
+
+/* CARROSSEL GRANDE NO BACKGROUND */
+#hero-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+}
+
+.hero-carousel-item {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.hero-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(10, 23, 72, 0.3) 50%,
+        var(--backgroud-color) 100%
+    );
+    pointer-events: none;
+}
+
+#hero-carousel-prev, #hero-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 56, 255, 0.5);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+#hero-carousel-prev:hover, #hero-carousel-next:hover {
+    background: var(--default-color);
+}
+
+#hero-carousel-prev {
+    left: 20px;
+}
+
+#hero-carousel-next {
+    right: 20px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: var(--default-color);
+    transform: scale(1.2);
+}
+
+/* Conteúdo sobre o carrossel */
+#container-text-hero {
+    position: relative;
+    z-index: 2;
+}
+
+header {
+    position: relative;
+    z-index: 3;
+}
+
+/* Ajuste para mobile */
+@media (max-width: 768px) {
+    #hero-carousel-prev, #hero-carousel-next {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    #hero-carousel-prev {
+        left: 10px;
+    }
+    
+    #hero-carousel-next {
+        right: 10px;
+    }
+    
+    .carousel-indicators {
+        bottom: 20px;
+    }
 }

@@ -146,3 +146,27 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+
+.card {
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card:hover .image-card {
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+}
+
+#search-bar:focus-within {
+    border-color: var(--default-color);
+    box-shadow: 0 0 10px var(--default-color);
+}
+
+.num-page:hover {
+    background-color: rgba(0, 56, 255, 0.3);
+}

@@ -6,6 +6,24 @@ const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const selectGenre = document.getElementById('select-genre');
 
+export async function loadMovieDetails(movieId, mediaType = 'movie') {
+    try {
+        const response = await fetch(`${BASE_URL}/${mediaType}/${movieId}?api_key=${API_KEY}&language=pt-BR`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao carregar detalhes:', error);
+    }
+}
+
+async function showMovieDetails(movieId, mediaType) {
+    const details = await loadMovieDetails(movieId, mediaType);
+    
+    console.log('Detalhes do filme:', details);
+    
+    alert(`Título: ${details.title || details.name}\nSinopse: ${details.overview || 'Sem sinopse disponível'}`);
+}
+
 async function createCard (cardData) {
     
     const containerCards = document.getElementById('container-cards');
@@ -34,7 +52,6 @@ async function createCard (cardData) {
             yearBox.appendChild(textYearBox);
             imageCard.appendChild(yearBox);
             
-            //titulo do filme
             const titleCard = document.createElement('div');
             titleCard.classList.add('title-card');
             const textTitleCard = document.createElement('p');
@@ -49,7 +66,6 @@ async function createCard (cardData) {
             
             titleCard.appendChild(textTitleCard);
     
-            //box info
             const containerInfo = document.createElement('div');
             containerInfo.classList.add('container-info');
             const boxInfoType = document.createElement('span');
@@ -76,13 +92,16 @@ async function createCard (cardData) {
             containerInfo.appendChild(boxInfoType);
             containerInfo.appendChild(boxInfoGen);
         
-            //card do filme
             const cardBox = document.createElement('div');
             cardBox.classList.add('card');
             cardBox.appendChild(imageCard);
             cardBox.appendChild(titleCard);
             cardBox.appendChild(containerInfo);
         
+            cardBox.addEventListener('click', () => {
+                showMovieDetails(card.id, card.media_type || 'movie');
+            });
+            
             containerCards.appendChild(cardBox);
         } catch (error) {
             console.error('Erro ao carregar cards:', error);
@@ -114,27 +133,49 @@ export async function loadCards(numPage) {
     }
 }
 
-export async function loadCardsSearch(name) {
+export async function loadCardsSearch(name, page = 1) {
     try {
-        const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${name}`);
+        const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${name}&page=${page}`);
         const data = await response.json();
+        
+        const containerCards = document.getElementById('container-cards');
+        containerCards.innerHTML = '';
+        
         createCard(data.results);
+
+        return data;
 
     } catch (error) {
         console.error('Erro ao buscar filme:', error);
     }
 }
 
+export async function loadCardsByGenre(genreId, page = 1) {
+    try {
+        const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&language=pt-BR&with_genres=${genreId}&page=${page}`);
+        const data = await response.json();
+        
+        const containerCards = document.getElementById('container-cards');
+        containerCards.innerHTML = '';
+        
+        createCard(data.results);
+        return data;
+
+    } catch (error) {
+        console.error('Erro ao carregar filmes por gênero:', error);
+    }
+}
+
 export async function loadGenres() {
     try {
-        const respose = await fetch(
+        const response = await fetch(
             `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=pt-BR`
         );
-        const data = await respose.json();
+        const data = await response.json();
 
         populateSelectGenre(data.genres);
 
-        return data.genres
+        return data.genres;
 
     } catch (error) {
         console.error('Erro ao carregar gêneros:', error);
@@ -150,4 +191,3 @@ const populateSelectGenre = (genres) => {
         selectGenre.appendChild(option);
     });
 };
-
