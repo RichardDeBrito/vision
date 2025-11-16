@@ -52,6 +52,8 @@ export function pagination(typeLoadCardsNum) {
         containerCards.innerHTML = '';
                 
         const atualPages = document.querySelectorAll('.num-page');
+
+        console.log(atualPages)
     
         if(atualPages[4].innerHTML >= 5) {
             returnPages.style.display = 'flex';
@@ -63,9 +65,12 @@ export function pagination(typeLoadCardsNum) {
     
         let countPagesString = endPage;
         let countPagesInt = Number(countPagesString);
-    
-        console.log(countPagesString);
-    
+        
+        const atualActivePage = document.getElementById('num-page-active');
+        atualActivePage.removeAttribute('id', 'num-page-active');
+
+        atualPages[0].setAttribute('id', 'num-page-active');
+
         atualPages.forEach((page) => {
     
             page.innerHTML = `${countPagesString}`;
@@ -89,6 +94,11 @@ export function pagination(typeLoadCardsNum) {
     
         let countPagesString = initialPage;
         let countPagesInt = Number(countPagesString);
+
+        const atualActivePage = document.getElementById('num-page-active');
+        atualActivePage.removeAttribute('id', 'num-page-active');
+
+        atualPages[0].setAttribute('id', 'num-page-active');
     
         if(initialPage === '5') {
             returnPages.style.display = 'none';
