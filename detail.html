@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Movies</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/mediaQuerys.css">
+</head>
+<body>
+     <div id="container-hero-details">
+        <header>
+            <div id="container-header">
+                <div class="logo" id="logo-header">
+                    <img src="./img/play-vision.png" alt="play-vision">
+                    <h1>VISION</h1>
+                </div>
+                <div id="menu">
+                    <nav id="options-menu">
+                        <ul>
+                            <li><a href="./index.html#container-hero">Inicio</a></li>
+                            <li><a href="./index.html#catalog-sec">Catálogo</a></li>
+                        </ul>
+                    </nav>
+                    <div id="search-bar">
+                        <button id="button-search">
+                            <img src="img/lupa-branca.png" alt="lupa">
+                        </button>
+                        <input type="text" id="input-search" placeholder="Buscar conteúdo...">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+        <section class="media-details">
+            <div class="poster">
+                <img id="image-media" src="./img/ponte-para-terabitia.webp" alt="media-cover">
+            </div>
+            <div class="media-information">
+                <h1 id="media-title"></h1>
+                <div class="media-rating">
+                    <div class="container-info" id="genre-list">
+                        <!-- <span class="box-info"></span>
+                        <span class="box-info"></span> -->
+                    </div>
+                    <p><span id="rating">0.0</span>/10</p>
+                    <p><img id="rating-image" src="./img/estrela.png" alt="estrela"></p>
+                </div>
+                <div class="media-info">
+                    <p>Nome Original: <span id="original-name"></span></p>
+                    <p>Lançamento: <span id="release-date"></span></p>
+                    <p>Tipo: <span id="media-type"></span></p>
+                    <p id="season-block">Temporadas: <span id="seasons"></span></p>
+                    <p id="episodes-block">Episódios: <span id="episodes"></span></p>
+                    <p>Sinopse: <span id="synopsis"></span></p>
+                </div> 
+            </div>
+        </section>
+               
+     </main>
+     </div>
+
+     <section class="related-media">
+            <div id="title-related">
+                <h2>Relacionados</h2>
+            </div>
+            <div id="container-cards"></div>
+        </section>
+
+     <footer>
+        <div id="container-footer">
+            <div id="team">
+                <div id="container-team">
+                    <h4>Equipe de desenvolvimento</h4>
+                    <div>
+                        <div class="member">
+                            <div class="name">
+                                Cristian Brandão
+                            </div>
+                            <div class="social">
+                                <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                                <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="name">
+                                Francisco Osmar
+                            </div>
+                            <div class="social">
+                                <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                                <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="name">
+                                Richard Brito
+                            </div>
+                            <div class="social">
+                                <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                                <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="name">
+                                Victor Emanuel
+                            </div>
+                            <div class="social">
+                                <a href="#"><img src="img/instagram-icon.png" alt="instagram-icon" class="icon-img"></a>
+                                <a href="#"><img src="img/github-icon.png" alt="github-icon" class="icon-img"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo" id="logo-footer">
+                    <img src="img/play-vision.png" alt="play-vision">
+                    <h1>VISION</h1>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./scripts/details.js"></script>
+</body>
+</html>
