@@ -19,7 +19,7 @@ export async function loadMovieDetails(movieId, mediaType = 'movie') {
 async function showMovieDetails(movieId, mediaType) {
     const details = await loadMovieDetails(movieId, mediaType);
     
-    alert(`Título: ${details.title || details.name}\nSinopse: ${details.overview || 'Sem sinopse disponível'}`);
+
 }
 
 async function createCard (cardData) {
@@ -97,7 +97,9 @@ async function createCard (cardData) {
             cardBox.appendChild(containerInfo);
         
             cardBox.addEventListener('click', () => {
-                showMovieDetails(card.id, card.media_type || 'movie');
+                const mediaType = card.media_type || (card.first_air_date ? 'tv' : 'movie');
+                // redireciona para a página de detalhes com query params
+                window.location.href = `detail.html?id=${card.id}&type=${mediaType}`;
             });
             
             containerCards.appendChild(cardBox);
