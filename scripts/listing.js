@@ -16,12 +16,6 @@ export async function loadMovieDetails(movieId, mediaType = 'movie') {
     }
 }
 
-async function showMovieDetails(movieId, mediaType) {
-    const details = await loadMovieDetails(movieId, mediaType);
-    
-
-}
-
 async function createCard (cardData) {
     
     const containerCards = document.getElementById('container-cards');
@@ -98,7 +92,7 @@ async function createCard (cardData) {
         
             cardBox.addEventListener('click', () => {
                 const mediaType = card.media_type || (card.first_air_date ? 'tv' : 'movie');
-                // redireciona para a página de detalhes com query params
+    
                 window.location.href = `detail.html?id=${card.id}&type=${mediaType}`;
             });
             
@@ -126,7 +120,8 @@ export async function loadCards(numPage) {
 
         const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=a&page=${numPage}`);
         const data = await response.json();
-        createCard(data.results);
+    createCard(data.results);
+    return data;
         
     } catch (error) {
         console.error('Erro ao carregar os filmes:', error);

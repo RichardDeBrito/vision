@@ -1,103 +1,126 @@
-import { loadCards, loadCardsSearch } from "./listing.js";
+import { loadCards, loadCardsSearch, loadCardsByGenre } from "./listing.js";
 import { captInputValue } from "./utils.js";
 
-export function pagination(typeLoadCardsNum) {
+export async function pagination(typeLoadCardsNum = 1) {
     const inputValue = captInputValue();
-
     const containerCards = document.getElementById('container-cards');
-    containerCards.innerHTML = '';
+    const passPages = document.getElementById('pass-pages');
 
-    if(inputValue.trim() !== '') {   
-        loadCardsSearch(inputValue, 1);
+    const MAX_PAGES = 500;
+
+    let data;
+    if (typeLoadCardsNum === 2 && inputValue.trim() !== '') {
+        data = await loadCardsSearch(inputValue, 1);
     } else {
-        loadCards(1);
+        data = await loadCards(1);
     }
 
-    const buttonsPages = document.querySelectorAll('.num-page');
-    
-    for (const buttonPage of buttonsPages) {
-        buttonPage.addEventListener('click', () => {
-            const pageSelect = parseInt(buttonPage.innerHTML);
+    if (!data) return;
 
-            containerCards.innerHTML = '';
+    let totalPages = Math.min(data.total_pages || 1, MAX_PAGES);
 
-            switch (typeLoadCardsNum) {
-                case 1:
-                    loadCards(pageSelect);
-                    break;
-                case 2:
-                    loadCardsSearch(inputValue, pageSelect);
-                    break;
-                default:
-                    loadCards(pageSelect);
-                    break;
-            }
+    passPages.innerHTML = '';
 
-            const pageActive = document.getElementById('num-page-active');
-            if (pageActive) {
-                pageActive.removeAttribute('id');
-            }
+    const returnBtn = document.createElement('div');
+    returnBtn.id = 'return';
+    returnBtn.textContent = '‹';
+    returnBtn.style.cursor = 'pointer';
+    passPages.appendChild(returnBtn);
 
-            buttonPage.setAttribute('id', 'num-page-active');
-        });
+    const pagesContainer = document.createElement('div');
+    pagesContainer.id = 'pages-list';
+    pagesContainer.style.display = 'flex';
+    pagesContainer.style.gap = '8px';
+    passPages.appendChild(pagesContainer);
+
+    const nextBtn = document.createElement('div');
+    nextBtn.id = 'next';
+    nextBtn.textContent = '›';
+    nextBtn.style.cursor = 'pointer';
+    passPages.appendChild(nextBtn);
+
+    let startPage = 1;
+    function renderPageBlock() {
+        pagesContainer.innerHTML = '';
+        const endPage = Math.min(startPage + 4, totalPages);
+        for (let p = startPage; p <= endPage; p++) {
+            const pageBtn = document.createElement('div');
+            pageBtn.classList.add('num-page');
+            pageBtn.textContent = `${p}`;
+            pageBtn.style.cursor = 'pointer';
+            if (p === 1) pageBtn.id = 'num-page-active';
+            pagesContainer.appendChild(pageBtn);
+        }
+        
+        if (startPage <= 1) {
+            returnBtn.style.display = 'none';
+        } else {
+            returnBtn.style.display = 'flex';
+        }
+
+        if (startPage + 5 > totalPages) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'flex';
+        }
     }
 
-    const nextPages = document.getElementById('next');
-    const returnPages = document.getElementById('return');
-    
-    nextPages.addEventListener('click', () => {
+    renderPageBlock();
+
+    async function loadPage(pageNumber) {
         containerCards.innerHTML = '';
-                
-        const atualPages = document.querySelectorAll('.num-page');
-
-        if(atualPages[4].innerHTML >= 5) {
-            returnPages.style.display = 'flex';
+        if (typeLoadCardsNum === 2 && inputValue.trim() !== '') {
+            await loadCardsSearch(inputValue, pageNumber);
+        } else {
+            await loadCards(pageNumber);
         }
+    }
 
-        let endPage = parseInt(atualPages[4].innerHTML);
-        
-        loadCards(endPage);
+    pagesContainer.addEventListener('click', async (e) => {
+        const target = e.target;
+        if (!target.classList.contains('num-page')) return;
+        const pageSelect = parseInt(target.textContent, 10);
+        await loadPage(pageSelect);
 
-        let countPagesInt = endPage;
-        
-        const atualActivePage = document.getElementById('num-page-active');
-        if (atualActivePage) {
-            atualActivePage.removeAttribute('id');
-        }
-
-        atualPages[0].setAttribute('id', 'num-page-active');
-
-        atualPages.forEach((page) => {
-            page.innerHTML = `${countPagesInt}`;
-            countPagesInt += 1;
-        });
+        const current = document.getElementById('num-page-active');
+        if (current) current.removeAttribute('id');
+        target.id = 'num-page-active';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    
-    returnPages.addEventListener('click', () => {
-        containerCards.innerHTML = '';
-    
-        const atualPages = document.querySelectorAll('.num-page');
-        
-        let initialPage = parseInt(atualPages[0].innerHTML);
-        
-        loadCards(initialPage - 4);
 
-        let countPagesInt = initialPage - 4;
+    nextBtn.addEventListener('click', () => {
+        if (startPage + 5 <= totalPages) {
+            startPage += 5;
+            renderPageBlock();
 
-        const atualActivePage = document.getElementById('num-page-active');
-        if (atualActivePage) {
-            atualActivePage.removeAttribute('id');
+            const firstBtn = pagesContainer.querySelector('.num-page');
+            if (firstBtn) {
+                const current = document.getElementById('num-page-active');
+                if (current) current.removeAttribute('id');
+                firstBtn.id = 'num-page-active';
+                loadPage(parseInt(firstBtn.textContent, 10));
+
+                if (startPage + 5 > totalPages) nextBtn.style.display = 'none';
+                if (startPage > 1) returnBtn.style.display = 'flex';
+            }
         }
+    });
 
-        atualPages[0].setAttribute('id', 'num-page-active');
-    
-        if(initialPage === 5) {
-            returnPages.style.display = 'none';
+
+    returnBtn.addEventListener('click', () => {
+        if (startPage - 5 >= 1) {
+            startPage -= 5;
+            renderPageBlock();
+            const firstBtn = pagesContainer.querySelector('.num-page');
+            if (firstBtn) {
+                const current = document.getElementById('num-page-active');
+                if (current) current.removeAttribute('id');
+                firstBtn.id = 'num-page-active';
+                loadPage(parseInt(firstBtn.textContent, 10));
+                
+                if (startPage <= 1) returnBtn.style.display = 'none';
+                if (startPage + 5 <= totalPages) nextBtn.style.display = 'flex';
+            }
         }
-
-        atualPages.forEach((page) => {
-            page.innerHTML = `${countPagesInt}`;
-            countPagesInt += 1;
-        });
     });
 }
